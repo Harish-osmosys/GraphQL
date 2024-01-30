@@ -8,10 +8,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 //Register Service
-builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 
-//InMemory Database
+// Database
 builder.Services.AddDbContext<DbContextClass>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("DBConnection");
@@ -22,8 +21,6 @@ builder.Services.AddDbContext<DbContextClass>(options =>
 //GraphQL Config
 builder.Services.AddGraphQLServer()
     .AddQueryType<TaskQueryTypes>();
-
-
 
 var app = builder.Build();
 
